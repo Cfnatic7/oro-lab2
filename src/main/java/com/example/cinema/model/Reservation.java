@@ -40,4 +40,8 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "ticket_type_id", nullable = false)
     private TicketType ticketType;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 }

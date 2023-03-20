@@ -1,0 +1,126 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Michał (generated)" id="1679316018390-1">
+        <createTable tableName="movies">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="movies_pkey"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-2">
+        <createTable tableName="reservations">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="reservations_pkey"/>
+            </column>
+            <column name="confirmed" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiration_time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="seat_number" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="screening_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ticket_type_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-3">
+        <createTable tableName="screening_rooms">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="screening_rooms_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-4">
+        <createTable tableName="screenings">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="screenings_pkey"/>
+            </column>
+            <column name="start_time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="movie_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="screening_room_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-5">
+        <createTable tableName="ticket_types">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ticket_types_pkey"/>
+            </column>
+            <column name="price" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ticket_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-6">
+        <createTable tableName="user_entity">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_entity_pkey"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-7">
+        <addUniqueConstraint columnNames="username" constraintName="uk_2jsk4eakd0rmvybo409wgwxuw" tableName="user_entity"/>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-8">
+        <addUniqueConstraint columnNames="email" constraintName="uk_4xad1enskw4j1t2866f7sodrx" tableName="user_entity"/>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-9">
+        <addForeignKeyConstraint baseColumnNames="screening_room_id" baseTableName="screenings" constraintName="fk54096mkj4u0gh0w9xqwju8mhv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="screening_rooms" validate="true"/>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-10">
+        <addForeignKeyConstraint baseColumnNames="ticket_type_id" baseTableName="reservations" constraintName="fkduknlqrg1ylyeb01grfwe1auy" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ticket_types" validate="true"/>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-11">
+        <addForeignKeyConstraint baseColumnNames="screening_id" baseTableName="reservations" constraintName="fkps2fsuvl9g54tk7qitklej8rh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="screenings" validate="true"/>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-12">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="reservations" constraintName="fkq34x28haiiyadvfvo6y8bpeum" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user_entity" validate="true"/>
+    </changeSet>
+    <changeSet author="Michał (generated)" id="1679316018390-13">
+        <addForeignKeyConstraint baseColumnNames="movie_id" baseTableName="screenings" constraintName="fkrnko8743nv2o7jd7ix2wtcyf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="movies" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
