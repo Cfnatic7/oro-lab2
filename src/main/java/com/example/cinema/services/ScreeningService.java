@@ -34,4 +34,11 @@ public class ScreeningService {
         query.setParameter("movieTitle", movieTitle);
         return query.getResultList().stream().map(screeningMapper::mapToDto).toList();
     }
+
+    public List<ScreeningDto> findScreeningsByMovieId(Long movieId) {
+        String hql = "SELECT s FROM Screening s WHERE s.movie.id = :movieId";
+        TypedQuery<Screening> query = entityManager.createQuery(hql, Screening.class);
+        query.setParameter("movieId", movieId);
+        return query.getResultList().stream().map(screeningMapper::mapToDto).toList();
+    }
 }
