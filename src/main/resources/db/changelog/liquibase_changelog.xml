@@ -123,4 +123,46 @@
     <changeSet author="Michał (generated)" id="1679316018390-13">
         <addForeignKeyConstraint baseColumnNames="movie_id" baseTableName="screenings" constraintName="fkrnko8743nv2o7jd7ix2wtcyf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="movies" validate="true"/>
     </changeSet>
+    <changeSet id="14" author="Michał">
+        <dropColumn tableName="reservations" columnName="customer_name"/>
+        <dropColumn tableName="reservations" columnName="customer_email"/>
+    </changeSet>
+    <changeSet id="15" author="Michał">
+        <insert tableName="movies">
+            <column name="id" value="1"/>
+            <column name="title">Inception</column>
+        </insert>
+        <insert tableName="user_entity">
+            <column name="id" value="1"/>
+            <column name="password" value="test"/>
+            <column name="email" value="john@email.com"/>
+            <column name="username" value="john"/>
+            <column name="first_name" value="john"/>
+            <column name="last_name" value="tresting"/>
+        </insert>
+        <insert tableName="ticket_types">
+            <column name="id" value="1"/>
+            <column name="price" value="36"/>
+            <column name="ticket_type" value="STUDENT"/>
+        </insert>
+        <insert tableName="screening_rooms">
+            <column name="id" value="1"/>
+            <column name="name" value="Piołun"/>
+        </insert>
+        <insert tableName="screenings">
+            <column name="id" value="1"/>
+            <column name="start_time" value="2023-03-24 14:53:31"/>
+            <column name="movie_id" value="1"/>
+            <column name="screening_room_id" value="1"/>
+        </insert>
+        <insert tableName="reservations">
+            <column name="id" value="1"/>
+            <column name="confirmed" value="false"/>
+            <column name="expiration_time" value="2023-03-27 14:53:31"/>
+            <column name="screening_id" value="1"/>
+            <column name="ticket_type_id" value="1"/>
+            <column name="user_id" value="1"/>
+            <column name="seat_number" value="15"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

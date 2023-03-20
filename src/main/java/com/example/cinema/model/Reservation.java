@@ -19,12 +19,6 @@ public class Reservation {
     private Long id;
 
     @Column(nullable = false)
-    private String customerName;
-
-    @Column(nullable = false)
-    private String customerEmail;
-
-    @Column(nullable = false)
     private int seatNumber;
 
     @Column(nullable = false)
