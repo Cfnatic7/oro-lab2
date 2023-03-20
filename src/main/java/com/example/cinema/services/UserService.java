@@ -27,4 +27,11 @@ public class UserService {
         query.setParameter("screeningId", screeningId);
         return query.getResultList().stream().map(userMapper::mapToDto).toList();
     }
+
+    public List<UserDto> findUsersByUsername(String username) {
+        String hql = "SELECT u FROM UserEntity u WHERE u.username = :username";
+        TypedQuery<UserEntity> query = entityManager.createQuery(hql, UserEntity.class);
+        query.setParameter("username", username);
+        return query.getResultList().stream().map(userMapper::mapToDto).toList();
+    }
 }

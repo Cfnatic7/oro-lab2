@@ -19,8 +19,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("screening/{screeningId}")
-    public ResponseEntity<List<UserDto>> findMoviesByScreeningRoomId(@PathVariable Long screeningId) {
+    public ResponseEntity<List<UserDto>> findUsersByScreeningId(@PathVariable Long screeningId) {
         List<UserDto> movies = userService.findUsersByScreeningId(screeningId);
+        return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("username/{username}")
+    public ResponseEntity<List<UserDto>> findUsersByUsername(@PathVariable String username) {
+        List<UserDto> movies = userService.findUsersByUsername(username);
         return ResponseEntity.ok(movies);
     }
 }
