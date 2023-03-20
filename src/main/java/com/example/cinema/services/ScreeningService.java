@@ -27,4 +27,11 @@ public class ScreeningService {
         query.setParameter("roomId", roomId);
         return query.getResultList().stream().map(screeningMapper::mapToDto).toList();
     }
+
+    public List<ScreeningDto> findScreeningsByMovieTitle(String movieTitle) {
+        String hql = "SELECT s FROM Screening s WHERE s.movie.title = :movieTitle";
+        TypedQuery<Screening> query = entityManager.createQuery(hql, Screening.class);
+        query.setParameter("movieTitle", movieTitle);
+        return query.getResultList().stream().map(screeningMapper::mapToDto).toList();
+    }
 }

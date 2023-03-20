@@ -19,9 +19,15 @@ public class ScreeningController {
 
     private final ScreeningService screeningService;
 
-    @GetMapping("/{roomId}")
+    @GetMapping("room/{roomId}")
     public ResponseEntity<List<ScreeningDto>> findMoviesByScreeningRoomId(@PathVariable Long roomId) {
         List<ScreeningDto> movies = screeningService.findScreeningsByRoomId(roomId);
+        return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("movie/{title}")
+    public ResponseEntity<List<ScreeningDto>> findMoviesByScreeningRoomId(@PathVariable String title) {
+        List<ScreeningDto> movies = screeningService.findScreeningsByMovieTitle(title);
         return ResponseEntity.ok(movies);
     }
 }
