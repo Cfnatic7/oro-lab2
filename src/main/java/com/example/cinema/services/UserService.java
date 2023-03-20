@@ -1,16 +1,13 @@
 package com.example.cinema.services;
 
-import com.example.cinema.dto.ScreeningDto;
 import com.example.cinema.dto.UserDto;
-import com.example.cinema.mapper.ScreeningMapper;
 import com.example.cinema.mapper.UserMapper;
-import com.example.cinema.model.Screening;
 import com.example.cinema.model.UserEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,5 +30,13 @@ public class UserService {
         TypedQuery<UserEntity> query = entityManager.createQuery(hql, UserEntity.class);
         query.setParameter("username", username);
         return query.getResultList().stream().map(userMapper::mapToDto).toList();
+    }
+
+    public Long getBoughtReservationsCount(LocalDateTime startDate, LocalDateTime endDate) {
+        String hql = "SELECT count(u) FROM UserEntity u JOIN Reservation r JOIN Screening s WHERE s.startTime BETWEEN :startDate AND :endDate";
+        TypedQuery<Long> query = entityManager.createQuery(hql, Long.class);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        return query.getSingleResult();
     }
 }
