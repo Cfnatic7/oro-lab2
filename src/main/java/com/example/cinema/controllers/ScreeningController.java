@@ -19,21 +19,32 @@ public class ScreeningController {
 
     private final ScreeningService screeningService;
 
-    @GetMapping("room/{roomId}")
-    public ResponseEntity<List<ScreeningDto>> findMoviesByScreeningRoomId(@PathVariable Long roomId) {
+    @GetMapping("/room/{roomId}")
+    public ResponseEntity<List<ScreeningDto>> findScreeningsByRoomId(@PathVariable Long roomId) {
         List<ScreeningDto> movies = screeningService.findScreeningsByRoomId(roomId);
         return ResponseEntity.ok(movies);
     }
 
-    @GetMapping("movie-name/{title}")
-    public ResponseEntity<List<ScreeningDto>> findMoviesByScreeningRoomId(@PathVariable String title) {
+    @GetMapping("/movie-title/{title}")
+    public ResponseEntity<List<ScreeningDto>> findScreeningsByMovieTitle(@PathVariable String title) {
         List<ScreeningDto> movies = screeningService.findScreeningsByMovieTitle(title);
         return ResponseEntity.ok(movies);
     }
 
-    @GetMapping("movie-id/{id}")
-    public ResponseEntity<List<ScreeningDto>> findMoviesByMovieId(@PathVariable Long id) {
+    @GetMapping("/movie-id/{id}")
+    public ResponseEntity<List<ScreeningDto>> findScreeningsByMovieId(@PathVariable Long id) {
         List<ScreeningDto> movies = screeningService.findScreeningsByMovieId(id);
         return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("/user/{username}")
+    public ResponseEntity<List<ScreeningDto>> findScreeningByUsername(@PathVariable String username) {
+        List<ScreeningDto> movies = screeningService.findScreeningByUsername(username);
+        return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("/busy")
+    public ResponseEntity<Long> getReservationCount() {
+        return ResponseEntity.ok(screeningService.getBusyCount());
     }
 }

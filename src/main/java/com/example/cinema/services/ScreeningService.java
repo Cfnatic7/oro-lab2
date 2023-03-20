@@ -41,4 +41,17 @@ public class ScreeningService {
         query.setParameter("movieId", movieId);
         return query.getResultList().stream().map(screeningMapper::mapToDto).toList();
     }
+
+    public List<ScreeningDto> findScreeningByUsername(String username) {
+        String hql = "SELECT s FROM Screening s Join Reservation r WHERE r.user.username = :username";
+        TypedQuery<Screening> query = entityManager.createQuery(hql, Screening.class);
+        query.setParameter("username", username);
+        return query.getResultList().stream().map(screeningMapper::mapToDto).toList();
+    }
+
+    public Long getBusyCount() {
+        String hql = "SELECT count(s) FROM Screening s Join Reservation r";
+        TypedQuery<Long> query = entityManager.createQuery(hql, Long.class);
+        return query.getSingleResult();
+    }
 }
